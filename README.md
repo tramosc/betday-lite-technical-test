@@ -1,36 +1,155 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BetDay Lite
 
-## Getting Started
+Mini aplicación web desarrollada como parte de una prueba técnica Frontend Senior.
 
-First, run the development server:
+Permite visualizar eventos deportivos del día, realizar apuestas simuladas del mercado 1X2 y consultar el historial de apuestas del usuario.
+
+---
+
+## Tecnologías
+
+- Next.js 15 (App Router)
+- React 18
+- TypeScript
+- NextAuth
+- Tailwind CSS
+- Sonner (Toast)
+
+---
+
+## Funcionalidades
+
+### Home
+
+- Timeline de partidos agrupados por hora.
+- Visualización de:
+  - Liga
+  - Equipos
+  - Mercado 1X2
+  - Cuotas
+- Simulación de apuestas.
+- Toast de confirmación.
+
+### Perfil
+
+- Ruta protegida mediante NextAuth.
+- Listado de apuestas realizadas.
+- Estados:
+  - Pending
+  - Won
+  - Lost
+- Empty State.
+
+### Detalle
+
+- Visualización del detalle de una apuesta.
+
+---
+
+## Arquitectura
+
+El proyecto está organizado siguiendo una estructura modular.
+
+```
+app/
+components/
+services/
+types/
+utils/
+lib/
+data/
+```
+
+Se separó la lógica de negocio en Services para facilitar su mantenimiento.
+
+---
+
+## Instalación
+
+```bash
+npm install
+```
+
+---
+
+## Variables de entorno
+
+Crear un archivo `.env.local`
+
+```env
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your_secret_key
+```
+
+---
+
+## Ejecutar
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abrir:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Cuenta Demo
 
-To learn more about Next.js, take a look at the following resources:
+Email
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+demo@betday.com
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Password
 
-## Deploy on Vercel
+```
+demo123
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Scripts
+
+```bash
+npm run dev
+npm run build
+npm run lint
+```
+
+---
+
+## Decisiones Técnicas
+
+- Uso de Server Components para las páginas.
+- Consumo de datos mediante API Routes.
+- Protección de rutas con NextAuth.
+- Persistencia temporal de apuestas mediante LocalStorage.
+- Componentes reutilizables para mantener una arquitectura limpia.
+
+---
+
+## Mejoras Futuras
+
+- Integración con una API real de apuestas.
+- Base de datos.
+- Gestión de usuarios.
+- Historial persistente.
+- Filtros por liga.
+- Búsqueda de partidos.
+- Favoritos.
+- Dashboard de estadísticas.
+
+---
+
+## Autor
+
+Toni Ramos
+
+GitHub
+
+https://github.com/tramosc
