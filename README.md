@@ -159,16 +159,20 @@ npm run lint
 
 ## Limitación conocida
 
-Las nuevas apuestas se simulan mediante una **API Route** utilizando almacenamiento temporal en memoria. En entornos **Serverless** como Vercel, este almacenamiento puede reiniciarse entre ejecuciones, por lo que las apuestas simuladas no son persistentes de manera permanente.
+Las apuestas simuladas se gestionan mediante API Routes utilizando almacenamiento temporal en memoria para cumplir con el objetivo de la prueba técnica sin incorporar una base de datos.
 
-En un entorno de producción esta implementación sería reemplazada por una base de datos para garantizar la persistencia de la información.
+Durante el desarrollo local, la aplicación se ejecuta sobre una única instancia de Node.js, por lo que las apuestas simuladas permanecen disponibles mientras el servidor esté en ejecución.
+
+Al desplegar la aplicación en Vercel, las API Routes se ejecutan sobre una arquitectura Serverless, donde cada solicitud puede ser atendida por diferentes instancias. Debido a ello, el almacenamiento en memoria no garantiza persistencia entre solicitudes o sesiones, por lo que las apuestas creadas pueden variar o restablecerse al estado inicial.
+
+En un entorno de producción, esta implementación sería reemplazada por una solución de persistencia (por ejemplo PostgreSQL, MySQL, MongoDB o Redis) manteniendo la misma arquitectura de servicios y API Routes.
 
 ---
 
 ## Mejoras Futuras
 
 * Integración con una API real de eventos deportivos.
-* Persistencia mediante base de datos.
+* Persistencia de apuestas mediante una base de datos relacional o NoSQL.
 * Gestión de usuarios.
 * Historial completo de apuestas.
 * Filtros por liga.
