@@ -4,6 +4,10 @@ export default withAuth({
   pages: {
     signIn: "/login",
   },
+  callbacks: {
+    authorized: ({ token }) => Boolean(token),
+  },
+  secret: process.env.NEXTAUTH_SECRET,
 });
 
 export const config = {

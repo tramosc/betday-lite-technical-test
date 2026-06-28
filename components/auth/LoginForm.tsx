@@ -1,18 +1,25 @@
 "use client";
 
-import { useState } from "react";
-import { signIn } from "next-auth/react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { signIn, useSession } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 
 export default function LoginForm() {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
+
+  const { status } = useSession();
 
   const [email, setEmail] = useState("demo@betday.com");
   const [password, setPassword] = useState("demo123");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      window.location.href = callbackUrl;
+    }
+  }, [status, callbackUrl]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -34,8 +41,7 @@ export default function LoginForm() {
       return;
     }
 
-    router.push(response?.url || "/");
-    router.refresh();
+    window.location.href = response?.url || "/";
   };
 
   return (
@@ -89,17 +95,15 @@ export default function LoginForm() {
 
         <button
           type="submit"
-          disabled={isLoading}
+          disabled={isLoading || status === "loading"}
           className="w-full rounded-xl bg-red-600 py-3 font-bold text-white shadow-lg shadow-red-200 transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-70"
         >
-          {isLoading ? "Ingresando..." : "Ingresar"}
+          {isLoading || status === "loading" ? "Ingresando..." : "Ingresar"}
         </button>
       </form>
 
       <div className="mt-8 rounded-2xl border border-zinc-200 bg-zinc-50 p-4 text-sm text-zinc-600">
-        <p className="mb-2 font-bold text-zinc-900">
-          Cuenta demo
-        </p>
+        <p className="mb-2 font-bold text-zinc-900">Cuenta demo</p>
 
         <p>Email: demo@betday.com</p>
         <p>Password: demo123</p>
